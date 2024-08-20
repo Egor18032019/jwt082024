@@ -8,12 +8,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import t1.jwt.demo.store.base.AbstractBaseEntity;
 import t1.jwt.demo.utils.RoleType;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Entity
@@ -33,6 +36,11 @@ public class User extends AbstractBaseEntity implements UserDetails {
     @Column(nullable = false)
     private final Set<RoleType> roles = new HashSet<>();
 
+    @CreatedDate
+    private LocalDateTime createdDate;
+
+    @LastModifiedDate
+    private LocalDateTime lastModifiedDat;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorityList = new ArrayList<>();

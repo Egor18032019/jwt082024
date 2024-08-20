@@ -10,6 +10,8 @@ import t1.jwt.demo.model.SignInRequest;
 import t1.jwt.demo.model.SignUpRequest;
 import t1.jwt.demo.store.users.User;
 
+import java.time.LocalDateTime;
+
 
 @Service
 @RequiredArgsConstructor
@@ -27,7 +29,7 @@ public class AuthenticationService {
      */
     public JwtAuthenticationResponse signUp(SignUpRequest request) {
 
-        var user = new User(request.getUsername(), request.getEmail(), passwordEncoder.encode(request.getPassword()));
+        var user = new User(request.getUsername(), request.getEmail(), passwordEncoder.encode(request.getPassword()), LocalDateTime.now(),LocalDateTime.now());
         userService.create(user);
 
         var jwt = jwtService.generateToken(user);
